@@ -1,0 +1,35 @@
+# Keil MDK — 用户配置
+*.uvguix.*
+
+# J-Link 调试器日志与配置
+JLinkLog.txt
+JLinkSettings.ini
+*.jlink
+JLinkRTTClient.log
+JLinkRTTViewer.log
+
+# 编译输出
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.htm
+*.dep
+*.iex
+*.sct
+*.scvd
+*.bak
+*.lnp
+*.mo
+*.elf
+
+# 临时文件
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
