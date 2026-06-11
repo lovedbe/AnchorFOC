@@ -11,7 +11,8 @@
 | 项目 | 说明 |
 |------|------|
 | MCU | GD32F303CB / GD32F30x 系列 (Cortex-M4 with FPU) |
-| 编码器 | MT6816 14-bit 磁编码器 (SPI) |
+| 编码器 | MT6816 14-bit 磁编码器 (SPI2) |
+| 显示屏 | ST7735S 80×160 TFT (SPI0, 30MHz) |
 | 驱动板 | 三相逆变桥 + 差分电流采样 (R010, gain≈36.5) |
 | 调试接口 | USART0 (PB6 TX, PB7 RX) @115200 |
 
@@ -30,6 +31,9 @@
 - **非阻塞校准** 零点 → R/L → 编码器 LUT
 - **Flash 存储** 校准结果掉电保存
 - **USART DMA** 收发（FIFO 缓冲 + 命令解析）
+- **DWT 周期计数器** ADC ISR 执行时间测量 + CPU 占用率
+- **ST7735S TFT 显示驱动** 80×160 竖屏，30MHz SPI
+- **万用表式数据面板** 转速 / 电流 / 位置 / CPU 差异刷新
 
 ## 目录结构
 
@@ -41,7 +45,9 @@ SVPWM_HALL/
 │   └── usr_config.c/h   用户配置（修改这里适配新电机/板）
 ├── bsp/                 板级支持包（硬件抽象）
 │   ├── bsp_adc.c/h      ADC + 电流采样
+│   ├── bsp_dwt.c/h      DWT 周期计数器（ADC 计时 + CPU%）
 │   ├── bsp_gpio.c/h     GPIO / LED
+│   ├── bsp_lcd.c/h      ST7735S TFT 驱动（SPI0, 30MHz）
 │   ├── bsp_mt6816.c/h   编码器 SPI 驱动
 │   ├── bsp_systick.c/h  系统时钟
 │   ├── bsp_timer.c/h    PWM 定时器
@@ -53,6 +59,10 @@ SVPWM_HALL/
 │   ├── motor.c/h        电机数据结构 + PI 控制器
 │   ├── svpwm.c/h        SVPWM + 坐标变换
 │   └── trajectory.c/h   S 曲线轨迹规划
+├── display/             显示界面
+│   ├── display_ui.c/h   数据面板渲染 + 差异刷新
+│   ├── display_theme.h  万用表主题配色
+│   └── lcdfont.h        ASCII 字库（4 种字号）
 ├── components/          通用组件
 │   └── fifo.c/h         环形缓冲区
 ├── GD32F30x_LIB/        标准外设库（不动）
@@ -109,19 +119,25 @@ git clone https://github.com/yourname/SVPWM_HALL.git
 ## 数据流
 
 ```
-main() loop [~1kHz]
+main() loop [~10kHz]
+  ├── UartCmdHandle() / UartPollDmaTx()    ← 串口优先
   ├── FocSystemRun()
   │     ├── CALIB → 校准状态机
-  │     └── RUN → 打印 Id/Iq/转速/角度
-  └── UartPollDmaTx() → TX FIFO → DMA 发送
+  │     └── RUN → 数据刷新
+  ├── TFT 刷新 [100ms]                     ← 差异更新，只写变化行
+  │     └── LCD_DrawRow() → SPI0 DMA/轮询
+  └── DWT 统计 [1s]
+        ├── DWT_CalcCPUUsage() → CPU%
+        └── DWT_GetAdcStats() → ISR 时间
 
 TIMER0 TRGO → ADC 触发 [20kHz]
-  └── ADC0_1_IRQHandler
-        ├── 读 ADC → 三相电流
-        ├── 读 MT6816 → 编码器角度
-        ├── PLL 速度估算
-        ├── 位置环 → 速度环 → 电流环
-        └── Clarke → Park → PI → InvPark → SVPWM
+  ├── DWT_ADC_START()                       ← 计时起点
+  ├── 读 ADC → 三相电流
+  ├── 读 MT6816 → 编码器角度
+  ├── PLL 速度估算
+  ├── 位置环 → 速度环 → 电流环
+  ├── Clarke → Park → PI → InvPark → SVPWM
+  └── DWT_ADC_END()                         ← 计时终点
 ```
 
 ## 许可

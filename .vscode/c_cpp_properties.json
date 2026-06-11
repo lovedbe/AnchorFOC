@@ -98,19 +98,20 @@
         {
             "name": "AnchorFOC",
             "includePath": [
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Include",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\GD32F30x_standard_peripheral\\Include",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\CMSIS",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\Utilities",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\bsp",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\motor",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\components",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Include",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\GD32F30x_standard_peripheral\\Include",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\CMSIS",
+                "e:\\GD32\\AnchorFOC\\Utilities",
+                "e:\\GD32\\AnchorFOC",
+                "e:\\GD32\\AnchorFOC\\bsp",
+                "e:\\GD32\\AnchorFOC\\motor",
+                "e:\\GD32\\AnchorFOC\\components",
+                "e:\\GD32\\AnchorFOC\\display",
                 "D:\\keil\\ARM\\ARMCC\\include",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\app",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Source\\ARM",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Source",
-                "c:\\Users\\Administrator\\Desktop\\AnchorFOC\\GD32F30x_LIB\\GD32F30x_standard_peripheral\\Source"
+                "e:\\GD32\\AnchorFOC\\app",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Source\\ARM",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\CMSIS\\GD\\GD32F30x\\Source",
+                "e:\\GD32\\AnchorFOC\\GD32F30x_LIB\\GD32F30x_standard_peripheral\\Source"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",

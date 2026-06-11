@@ -11,6 +11,7 @@
 #include "motor/trajectory.h"
 #include "bsp/bsp_usart.h"
 #include "bsp/bsp_systick.h"
+#include "bsp/bsp_dwt.h"
 #include <stddef.h>
 #include <math.h>
 #include <stdlib.h>
@@ -190,6 +191,8 @@ void ADC_Get_Three_Phase_Current(int16_t* i_u, int16_t* i_v, int16_t* i_w)
  */
 void ADC0_1_IRQHandler(void)
 {
+    DWT_ADC_START();
+
     if(adc_interrupt_flag_get(ADC0, ADC_INT_FLAG_EOIC))
     {
         // gpio_bit_toggle(GPIOB, GPIO_PIN_9); // 调试用：每次中断翻转PB9，观察频率和稳定性
@@ -376,5 +379,7 @@ void ADC0_1_IRQHandler(void)
         }
 
     }
+
+    DWT_ADC_END();
 }
 

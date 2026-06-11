@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\GD32F30x_LIB\CMSIS\GD\GD32F30x\Include;.\GD32F30x_LIB\GD32F30x_standard_peripheral\Include;.\GD32F30x_LIB\CMSIS;.\Utilities;.;.\bsp;.\motor;.\components</IncludePath>
+              <IncludePath>.\GD32F30x_LIB\CMSIS\GD\GD32F30x\Include;.\GD32F30x_LIB\GD32F30x_standard_peripheral\Include;.\GD32F30x_LIB\CMSIS;.\Utilities;.;.\bsp;.\motor;.\components;.\display</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -414,6 +414,16 @@
               <FileName>usr_config.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\usr_config.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display</GroupName>
+          <Files>
+            <File>
+              <FileName>display_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\display\display_ui.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -576,6 +586,11 @@
               <FilePath>.\bsp\bsp_adc.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_dwt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\bsp\bsp_dwt.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_mt6816.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\bsp\bsp_mt6816.c</FilePath>
@@ -584,6 +599,11 @@
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\bsp\bsp_systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\bsp\bsp_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

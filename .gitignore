@@ -27,9 +27,25 @@ JLinkRTTViewer.log
 *.mo
 *.elf
 
+# 编译输出目录
+output/
+list/
+
+# 构建日志
+build.log
+
+# IDE 个人配置
+.vscode/
+
 # 临时文件
 *~
 *.swp
 *.swo
 .DS_Store
 Thumbs.db
+
+# SciTools Understand 分析数据
+.understand-anything/
+understand/
+*.udb
+*.und

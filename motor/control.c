@@ -403,22 +403,22 @@ void FocSystemRun(void)
 
     case FOC_RUN:
         {
-            static uint32_t t_print = 0;
-            uint32_t now = g_pstSystemData->SystemTimes;
+            // static uint32_t t_print = 0;
+            // uint32_t now = g_pstSystemData->SystemTimes;
 
-            float rpm = Motor_Get_RPM();
+            // float rpm = Motor_Get_RPM();
 
-            if (now - t_print >= 10) {
-                float mech_deg = (float)g_pstMotorData->enc_corrected * 0.02197265625f; /* 360/16384 */
-                float pll_rpm = g_pstMotorData->pll_vel * 60.0f / 16384.0f;
-                UartPrintf("%.3f,%.3f,%.1f,%.1f,%.1f,%.1f,%.1f\r\n",
-                    g_pstMotorData->Id_filt, g_pstMotorData->Iq_filt,
-                    g_pstMotorData->electrical_angle, mech_deg,
-                    rpm, pll_rpm,
-                    g_pstMotorData->vel_setpoint * 60.0f);   /* rev/s → RPM */
-                t_print = now;
-            }
-            break;
+            // if (now - t_print >= 2000) {
+            //     float mech_deg = (float)g_pstMotorData->enc_corrected * 0.02197265625f; /* 360/16384 */
+            //     float pll_rpm = g_pstMotorData->pll_vel * 60.0f / 16384.0f;
+            //     UartPrintf("%.3f,%.3f,%.1f,%.1f,%.1f,%.1f,%.1f\r\n",
+            //         g_pstMotorData->Id_filt, g_pstMotorData->Iq_filt,
+            //         g_pstMotorData->electrical_angle, mech_deg,
+            //         rpm, pll_rpm,
+            //         g_pstMotorData->vel_setpoint * 60.0f);   /* rev/s → RPM */
+            //     t_print = now;
+            // }
+            // break;
         }
 
     case FOC_STOP: 
